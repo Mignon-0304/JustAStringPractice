@@ -1,0 +1,15 @@
+14
+append "hello world"
+backspace 5
+append "CP"
+print
+compare "HeLLo Cp"
+backspace 20
+print
+compare ""
+compare "hello"
+swap '\0' 'z'
+compare "hello"
+swap '\0' ' '
+append "AB"
+compare " "
