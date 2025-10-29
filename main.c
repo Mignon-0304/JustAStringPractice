@@ -24,66 +24,52 @@ int main(){
 
         //COMPARE (c can be letters or ' ')
         else if(strcmp(command, "compare")==0){
-            char c[10000]="";
-            scanf(" \"%[^\"]", c); //預設輸入_"，並在遇到下一個"時停止輸入
+            char b[10000]="";
+            scanf(" \"%[^\"]", b); //預設輸入_"，並在遇到下一個"時停止輸入
             getchar(); //clean "
-            if(s[0]=='\0'){ //if s is '\0'
-                for(j=0;j<28;j++){
-                    if(s[0]==dic[j]) break;
-                }
+            for(j=0; j<strlen(s) || s[0]=='\0'; j++){
                 for(m=0;m<28;m++){
-                    if(tolower(c[0])==dic[m]) break;
+                    if(tolower(s[j])==dic[m]) break;
                 }
-                if(j<m){
+                for(h=0;h<28;h++){
+                    if(tolower(b[j])==dic[h]) break;
+                }
+                if(m<h){
                     printf("less\n");
+                    break;
                 }
-                else if(j>m){
+                else if(m>h){
                     printf("greater\n");
+                    break;
                 }
-                else printf("equal\n");
+                else if(s[0]=='\0') break; //s[0]=='\0' && c[0]=='\0', m=n=0
+                else continue; //j==m && s[0]!='\0'
             }
-            else{
-                for(h=0;h<strlen(s);h++){
-                    for(m=0;m<28;m++){
-                        if(tolower(c[h])==dic[m]) break;
-                    }
-                    for(j=0;j<28;j++){
-                        if(tolower(s[h])==dic[j]) break;
-                    }
-                    if(j<m){
-                        printf("less\n");
-                        break;
-                    }
-                    else if(j>m){
-                        printf("greater\n");
-                        break;
-                    }
-                    else if(strlen(s)==0) break; //j==m且s=='\0'==b strlen是0所以要故意跳出去
-                    else continue;
-                }
-                if(m==j){
-                    printf("equal\n");
-                }
+            if(m==h){
+                printf("equal\n");
             }
         }
 
+        //COUNT
         else if(strcmp(command, "count")==0){
-            int appearances=0;
-            char b[10000]="";
-            scanf(" \"%[^\"]\"", b);
+            int time=0;
+            char c[10000]="";
+            scanf(" \"%[^\"]", c);
             getchar();
             char *find = s; //find指向s的第一位
-            while((find = strstr(find, b))!= NULL){ //看find裡面有沒有b然後如果有找到的話
+            while((find = strstr(find, c))!= NULL){ //看find裡面有沒有b然後如果有找到的話
                 find++; //移到那個位子的往右一個字再繼續找
-                appearances++;
+                time++;
             }
-            printf("%d\n", appearances);
+            printf("%d\n", time);
         }
+
+        //BACKSPACE
         else if(strcmp(command, "backspace")==0){
-            int end;
-            scanf("%d", &end);
-            if(end>strlen(s)) s[0]='\0';
-            else s[strlen(s)-end] = '\0';
+            int trash;
+            scanf("%d", &trash);
+            if(trash>strlen(s)) s[0]='\0';
+            else s[strlen(s)-trash] = '\0';
         }
         else if(strcmp(command, "toupper")==0){
             for(int i=0;i<strlen(s);i++) s[i]=toupper(s[i]);

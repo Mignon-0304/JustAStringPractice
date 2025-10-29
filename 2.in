@@ -1,0 +1,12 @@
+11
+append "aaaaAa ab"
+count "aa"
+count "ab"
+count "aB"
+toupper
+print
+count "aa"
+count "AAAA"
+tolower
+print
+count "aa"
