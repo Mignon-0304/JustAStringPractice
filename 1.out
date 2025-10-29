@@ -1,12 +1,7 @@
 "hello CP"
 equal
-17 17
 ""
 equal
-0 0
 less
-0 9
 greater
-27 9
 less
-2 27

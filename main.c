@@ -2,6 +2,8 @@
 #include <string.h>
 #include <ctype.h>
 
+
+
 int main(){
     int n; //there will be n commands later
     scanf("%d", &n);
@@ -19,21 +21,31 @@ int main(){
             char a[10000]="";
             scanf(" \"%[^\"]", a);  //預設輸入_"，並在遇到下一個"時停止輸入
             getchar(); //clean "
-            strcat(s,a);
+            strncat(s, a, 100000 - strlen(s) - 1);
         }
 
-        //COMPARE (c can be letters or ' ')
+        //COMPARE
         else if(strcmp(command, "compare")==0){
             char b[10000]="";
             scanf(" \"%[^\"]", b); //預設輸入_"，並在遇到下一個"時停止輸入
             getchar(); //clean "
-            for(j=0; j<strlen(s) || s[0]=='\0'; j++){
+            if(strlen(s)==0 && strlen(b)==0){
+                printf("equal\n");
+                continue;
+            }
+            int len_s = strlen(s), len_b = strlen(b);
+            int maxlen = len_s > len_b ? len_s : len_b;
+            for(j=0; j<maxlen; j++){
+                char cs=(j < len_s) ? tolower(s[j]) : '\0';
+                char cb=(j < len_b) ? tolower(b[j]) : '\0';
+
                 for(m=0;m<28;m++){
-                    if(tolower(s[j])==dic[m]) break;
+                    if(cs==dic[m]) break;
                 }
                 for(h=0;h<28;h++){
-                    if(tolower(b[j])==dic[h]) break;
+                    if(cb==dic[h]) break;
                 }
+
                 if(m<h){
                     printf("less\n");
                     break;
@@ -42,11 +54,7 @@ int main(){
                     printf("greater\n");
                     break;
                 }
-                else if(s[0]=='\0') break; //s[0]=='\0' && c[0]=='\0', m=n=0
-                else continue; //j==m && s[0]!='\0'
-            }
-            if(m==h){
-                printf("equal\n");
+                if(j == maxlen-1) printf("equal\n");
             }
         }
 
@@ -81,34 +89,28 @@ int main(){
 
         //SWAP
         else if(strcmp(command, "swap")==0){
-            char x, y;
-            getchar(); //space
-
-            for(h=0;h<3;h++){
-                m=getchar();
-                if(m==39) continue;
-                if(m==92){
-                    x='\0';
-                    getchar();
-                }
-                else x=(char)m;
-            }
-
+            char x='\0', y='\0';
             getchar();
-            for(h=0;h<3;h++){
-                m=getchar();
-                if(m==39) continue;
-                if(m==92){
-                    y='\0';
-                    getchar();
-                }
-                else y=(char)m;
+            getchar();
+            m = getchar();
+            if (m == '\\') {
+                getchar();
+                x = '\0';
             }
-            
+            else x=m;
+            getchar();
+            getchar();
+            getchar();
+            m = getchar();
+            if (m == '\\') {
+                getchar();
+                y = '\0';
+            }
+            else y=m;
+            getchar();
             for(m=0;m<28;m++){
                 if(dic[m]==x) dic[m]=y;
                 else if(dic[m]==y) dic[m]=x;
-                else continue;
             }
         }
     }
