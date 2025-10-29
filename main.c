@@ -79,31 +79,36 @@ int main(){
         }
         else if(strcmp(command, "print")==0) printf("\"%s\"\n", s);
 
+        //SWAP
         else if(strcmp(command, "swap")==0){
-            int m;
             char x, y;
-            int dk;
             getchar(); //space
-            getchar(); //'
-            dk=getchar();
-            if(dk=='\\'){
-                getchar();
-                x='\0';
+
+            for(h=0;h<3;h++){
+                m=getchar();
+                if(m==39) continue;
+                if(m==92){
+                    x='\0';
+                    getchar();
+                }
+                else x=(char)m;
             }
-            else x=(char)dk;
-            getchar(); //'
-            getchar(); //space
-            getchar(); //'
-            dk=getchar();
-            if(dk=='\\'){
-                getchar();
-                y='\0';
+
+            getchar();
+            for(h=0;h<3;h++){
+                m=getchar();
+                if(m==39) continue;
+                if(m==92){
+                    y='\0';
+                    getchar();
+                }
+                else y=(char)m;
             }
-            else y=(char)dk;
-            getchar(); //'
+            
             for(m=0;m<28;m++){
                 if(dic[m]==x) dic[m]=y;
                 else if(dic[m]==y) dic[m]=x;
+                else continue;
             }
         }
     }
