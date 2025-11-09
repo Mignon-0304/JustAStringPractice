@@ -2,12 +2,12 @@
 #include <string.h>
 #include <ctype.h>
 
+char s[100000]={'\0'};
+
 int main(){
     int n; //there will be n commands later
     scanf("%d", &n);
     char dic[28] = {'\0', ' ', 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-    char s[100000]={'\0'};
-
     int i, j, m, h; //counters
 
     for(int i=0;i<n;i++){
