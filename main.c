@@ -2,8 +2,6 @@
 #include <string.h>
 #include <ctype.h>
 
-
-
 int main(){
     int n; //there will be n commands later
     scanf("%d", &n);
