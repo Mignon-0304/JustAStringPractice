@@ -63,7 +63,7 @@ int main(){
             scanf(" \"%[^\"]", c);
             getchar();
             char *find = s; //find指向s的第一位
-            while((find = strstr(find, c))!= NULL){ //看find裡面有沒有b然後如果有找到的話
+            while((find = strstr(find, c))!= NULL){ //看find裡面有沒有c然後如果有找到的話
                 find++; //移到那個位子的往右一個字再繼續找
                 time++;
             }
