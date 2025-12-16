@@ -1,5 +1,5 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     '/Users/mignon/Desktop/github/first C/main'
+binary-path:     main
 relocations:     []
 ...
